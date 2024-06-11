@@ -248,8 +248,9 @@
             leaf_rotate_temp = leaf_rotate_temp + (180 / leaf_total * leaf_freq) + Math.floor(Math.random() *30);
             leaf_obj.style.rotate = leaf_rotate_temp + 'deg';
             leaf_obj.style.transformOrigin = '0% 95%';
-            leaf_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
-            leaf_obj.style.border = '6px solid '+ color0;
+            // leaf_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
+            leaf_obj.style.clipPath = 'polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%)';
+            leaf_obj.style.border = '6px solid '+ color0; 
             leaf_obj.style.filter = 'blur('+( 20 * ( (leaf_total - num) / leaf_total) +2)+'px)';
             leaf_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color0, 0.5);
             leaves_obj.appendChild(leaf_obj);
