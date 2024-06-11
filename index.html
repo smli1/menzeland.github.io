@@ -157,10 +157,133 @@
     </div>
     <div style="width: 100vw; height: 100vh; position: absolute; top:0; right: 0; margin: 0;padding: 0;
     "></div>
-    <div class="loop_obj">
+    <!-- <div class="loop_obj">
         <div class="animObj">
             <div class="sprite"></div>
         </div>
+    </div> -->
+    <div  class="leaves_frame" style="width: 100vw; height: 100vh;position: fixed;">
+        <!-- <div style="width: 100vw; height: 100vh; position: relative; top:calc(100vh - 50px);">
+            <div style="
+                left: 15px;
+                top: 3px;
+                width: 25px;
+                height: 20px;
+                position: relative;
+                background-color: #217425; 
+                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
+                border: 3px solid #23441d ;">
+            </div>
+            <div style="
+                left: 3px;
+                top: 11px;
+                transform: rotate(230deg);
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                background-color: #58c45e; 
+                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
+                border: 3px solid #23441d ;">
+            </div>
+            <div style="
+                left: 6px;
+                top: 3px;
+                transform: rotate(280deg);
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                background-color: #17921d; 
+                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
+                border: 3px solid #23441d ;">
+            </div>
+            <div style="
+                left: 28px;
+                top: 14px;
+                transform: rotate(40deg);
+                width: 20px;
+                height: 20px;
+                position: absolute;
+                background-color: #17811c; 
+                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
+                border: 3px solid #23441d ;">
+            </div>
+            </div>
+        </div> -->
     </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // console.log('123');
+        let leaves_frame = document.querySelector('.leaves_frame');
+        let leaves_obj = document.createElement('div');
+        leaves_obj.style.top = 'calc(50vh - 50px)';
+        leaves_obj.style.left = 'calc(50vw - 50px)';
+        leaves_obj.style.position = 'relative';
+        let leaf_total = 37;
+        let leaf_freq = 8; 
+        let leaf_rotate_temp = 0;  
+        let color0 = 'rgb('+ (Math.floor(Math.random() * 105) + 50) +',' + (Math.floor(Math.random() * 105) + 50) +','+ (Math.floor(Math.random() * 155) + 50) + ')'; 
+        console.log('new flower')
+        for(let num = 1; num <= leaf_total; num++){ 
+            console.log(num) 
+            setTimeout(function() {
+                
+            let leaf_obj = document.createElement('div');
+            // const color1 = 'rgb(255,42,120)' ;
+            const color1 = color0 ;
+            const color2 = 'rgb(255,255,255)';
+            let percent = num * 1.1 / leaf_total;
+            console.log('percent : ' + (percent*100) + '%');
+            let rgbNew = colorInterpolate(color1,color2, percent);
+            // console.log(rgbNew);
+            leaf_obj.style.position = 'absolute';
+            // leaf_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
+            // leaf_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
+            leaf_obj.style.width = (Math.random() * 10 + 45) + 'px';
+            leaf_obj.style.height = '50px';
+            leaf_obj.style.left = '0px';
+            leaf_obj.style.top = '0px';
+            // leaf_obj.style.backgroundColor = '#17921d';
+            leaf_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
+            leaf_rotate_temp = leaf_rotate_temp + (180 / leaf_total * leaf_freq) + Math.floor(Math.random() *30);
+            leaf_obj.style.rotate = leaf_rotate_temp + 'deg';
+            leaf_obj.style.transformOrigin = '0% 95%';
+            leaf_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
+            leaf_obj.style.border = '6px solid '+ color0;
+            leaf_obj.style.filter = 'blur('+( 20 * ( (leaf_total - num) / leaf_total) +2)+'px)';
+            leaf_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color0, 0.5);
+            leaves_obj.appendChild(leaf_obj);
+            }, num * 10);
+            // console.log(leaf_obj);
+        }
+        leaves_frame.appendChild(leaves_obj);
+        
+        // console.log(leaves_frame);
+    });
+
+    function colorInterpolate(colorA, colorB, intval) {
+        const rgbA = getRgb(colorA),
+            rgbB = getRgb(colorB);
+        const colorVal = (prop) =>
+            Math.round(rgbA[prop] * (1 - intval) + rgbB[prop] * intval);
+        return {
+            r: colorVal('r'),
+            g: colorVal('g'),
+            b: colorVal('b'),
+        }
+    }
+
+    function getRgb(color) {
+    let [r, g, b] = color.replace('rgb(', '')
+        .replace(')', '')
+        .split(',')
+        .map(str => Number(str));;
+    return {
+        r,
+        g,
+        b
+    }
+    }
+</script>
+
 </html>
