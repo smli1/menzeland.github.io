@@ -8,8 +8,8 @@
 <style>
     :root{
         --title-width: 200px;
-        --main-theme-color: #4989c5;
-        --main-theme-light-color: #d6d4f0;
+        --main-theme-color: #80d7ff;
+        --main-theme-light-color: #9a98b3;
     }
 
     #page{
@@ -32,7 +32,7 @@
        margin:  0;
     }
 
-    body::before{
+    /* body::before{
         content: '';
         position: fixed;
         top: 0;
@@ -42,7 +42,7 @@
         background-size: 1px 10px;
         background: linear-gradient(0deg, var(--main-theme-color), transparent ) repeat-x;
         
-    }
+    } */
 
     /* width */
     ::-webkit-scrollbar {
@@ -105,6 +105,15 @@
         animation-duration: 1s;
         animation-iteration-count: infinite;
         transform: rotateY(180deg);
+    }
+
+    @keyframes fadeOut {
+        0% {
+            opacity: 0%;
+        }
+        100%{
+            opacity: 100%;
+        }
     }
 
     @keyframes animIdle {
@@ -210,21 +219,23 @@
             </div>
         </div> -->
     </div>
-</body>
+</body> 
 <script>
-    document.addEventListener("DOMContentLoaded", () => {
+    document.addEventListener("DOMContentLoaded", () => { 
         // console.log('123');
         let leaves_frame = document.querySelector('.leaves_frame');
         let leaves_obj = document.createElement('div');
-        leaves_obj.style.top = 'calc(50vh - 50px)';
-        leaves_obj.style.left = 'calc(50vw - 50px)';
+        leaves_obj.style.top = 'calc(50vh - 100px)';
+        leaves_obj.style.left = 'calc(50vw - 0px)';
         leaves_obj.style.position = 'relative';
-        let leaf_total = 37;
-        let leaf_freq = 8; 
+        let leaf_total = 20 *4;
+        let leaf_freq = 16;
         let leaf_rotate_temp = 0;  
         let color0 = 'rgb('+ (Math.floor(Math.random() * 105) + 50) +',' + (Math.floor(Math.random() * 105) + 50) +','+ (Math.floor(Math.random() * 155) + 50) + ')'; 
-        console.log('new flower')
-        for(let num = 1; num <= leaf_total; num++){ 
+        let bgColor = colorInterpolate(color0,'rgb(255,255,255)' , 0.8);
+        document.querySelector('body').style.backgroundColor = `rgb( `+bgColor.r+`,`+bgColor.g+`,`+bgColor.b+`)`;
+        console.log('new flower : ');
+        for(let num = 1; num <= leaf_total; num++) {
             console.log(num) 
             setTimeout(function() {
                 
@@ -232,15 +243,15 @@
             // const color1 = 'rgb(255,42,120)' ;
             const color1 = color0 ;
             const color2 = 'rgb(255,255,255)';
-            let percent = num * 1.1 / leaf_total;
-            console.log('percent : ' + (percent*100) + '%');
+            let percent = num * 0.9 / leaf_total;
+            console.log('percent : ' + (percent * 100) + '%'); 
             let rgbNew = colorInterpolate(color1,color2, percent);
             // console.log(rgbNew);
             leaf_obj.style.position = 'absolute';
             // leaf_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
             // leaf_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
-            leaf_obj.style.width = (Math.random() * 10 + 45) + 'px';
-            leaf_obj.style.height = '50px';
+            leaf_obj.style.width = (Math.random() * 20 + 105) + 'px';
+            leaf_obj.style.height = '100px'
             leaf_obj.style.left = '0px';
             leaf_obj.style.top = '0px';
             // leaf_obj.style.backgroundColor = '#17921d';
@@ -250,16 +261,35 @@
             leaf_obj.style.transformOrigin = '0% 95%';
             // leaf_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
             leaf_obj.style.clipPath = 'polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%)';
-            leaf_obj.style.border = '6px solid '+ color0; 
+            leaf_obj.style.border = '6px solid '+ color0;
             leaf_obj.style.filter = 'blur('+( 20 * ( (leaf_total - num) / leaf_total) +2)+'px)';
             leaf_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color0, 0.5);
+            const timeline = new ViewTimeline({
+                subject: leaf_obj,
+                axis: "block",
+            });
+            // leaf_obj.animate( {
+            //     opacity: [0, 1.6], 
+            //     transform: ["rotate(0deg)","rotate(180deg)"]
+            //     // transform: ["scaleX(0)", "scaleX(1)"],
+            // },
+            // {
+            //     fill: "both", 
+            //     duration: 1,  
+            //     timeline,
+            //     rangeStart: "cover 0%",
+            //     rangeEnd: "cover 100%",      
+            // });
+            leaf_obj.addEventListener("mousedown", function(e){
+                this.remove();
+            });
             leaves_obj.appendChild(leaf_obj);
-            }, num * 10);
+            }, 0);
             // console.log(leaf_obj);
         }
         leaves_frame.appendChild(leaves_obj);
         
-        // console.log(leaves_frame);
+        // console.log(leaves_frame) 
     });
 
     function colorInterpolate(colorA, colorB, intval) {
