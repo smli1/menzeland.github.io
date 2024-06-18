@@ -8,8 +8,22 @@
 <style>
     :root{
         --title-width: 200px;
-        --main-theme-color: #80d7ff;
         --main-theme-light-color: #9a98b3;
+    }
+
+    .title{
+        position:absolute;
+        top:calc(50vh ); 
+        left:calc(50vw);
+        z-index:99 ; 
+        color: #FFF; 
+        font-size: 1em; 
+        font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+        -webkit-user-select: none; /* Safari */
+        -ms-user-select: none; /* IE 10 and IE 11 */
+        user-select: none; /* Standard syntax */
+        /* box-shadow: inset 0px -5px; */
+        text-shadow: 1px 1px 10px #222222;
     }
 
     #page{
@@ -107,6 +121,53 @@
         transform: rotateY(180deg);
     }
 
+    .patterns_frame{
+        animation: loop-rotate;
+        animation-duration: 180s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+    }
+
+    .pattern_btn{
+        cursor: pointer;
+        display: flex;
+        width: 50px;
+        height: 50px;
+        background-color: #FFF;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .pattern_btnGrp{
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        gap: 10px 10px;
+        width: 100vw;
+        height: 100vh;
+        background-color: transparent;
+        position: fixed;
+        /* left: 10px; */
+        top: calc(100vh - 65px);
+    }
+
+    .pattern_polygon{
+        position: relative;
+        width: 90%;
+        height: 90%;
+        background-color: #CCC;
+        pointer-events: none;
+    }
+
+    @keyframes loop-rotate {
+        0% {
+            rotate: 0deg;
+        }
+        100%{
+            rotate: 360deg;
+        }
+    }
+
     @keyframes fadeOut {
         0% {
             opacity: 0%;
@@ -117,16 +178,30 @@
     }
 
     @keyframes animIdle {
-        0% {background-position: calc(var(--anim-width) * 0 ) calc(var(--anim-height) * var(--anim-col));
-            }
-        24.99% {background-position: calc(var(--anim-width) * 0 ) calc(var(--anim-height) * var(--anim-col));}
-        25% {background-position: calc(var(--anim-width) * 1 ) calc(var(--anim-height) * var(--anim-col));}
-        49.99% {background-position: calc(var(--anim-width) * 1 ) calc(var(--anim-height) * var(--anim-col));}
-        50% {background-position: calc(var(--anim-width) * 2 ) calc(var(--anim-height) * var(--anim-col));}
-        74.99% {background-position: calc(var(--anim-width) * 2 ) calc(var(--anim-height) * var(--anim-col));}
-        75% {background-position: calc(var(--anim-width) * 3 ) calc(var(--anim-height) * var(--anim-col));}
-        100% {background-position: calc(var(--anim-width) * 3 ) calc(var(--anim-height) * var(--anim-col));
-            }
+        0% {
+            background-position: calc(var(--anim-width) * 0 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        24.99% {
+            background-position: calc(var(--anim-width) * 0 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        25% {
+            background-position: calc(var(--anim-width) * 1 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        49.99% {
+            background-position: calc(var(--anim-width) * 1 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        50% {
+            background-position: calc(var(--anim-width) * 2 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        74.99% {
+            background-position: calc(var(--anim-width) * 2 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        75% {
+            background-position: calc(var(--anim-width) * 3 ) calc(var(--anim-height) * var(--anim-col));
+        }
+        100% {
+            background-position: calc(var(--anim-width) * 3 ) calc(var(--anim-height) * var(--anim-col));
+        }
     }
 
     @keyframes animWalk {
@@ -164,133 +239,164 @@
 
         </div>
     </div>
+    <!-- <div class="title">
+        Menzelan  
+    </div> -->
     <div style="width: 100vw; height: 100vh; position: absolute; top:0; right: 0; margin: 0;padding: 0;
     "></div>
-    <!-- <div class="loop_obj">
-        <div class="animObj">
-            <div class="sprite"></div>
-        </div>
-    </div> -->
-    <div  class="leaves_frame" style="width: 100vw; height: 100vh;position: fixed;">
-        <!-- <div style="width: 100vw; height: 100vh; position: relative; top:calc(100vh - 50px);">
-            <div style="
-                left: 15px;
-                top: 3px;
-                width: 25px;
-                height: 20px;
-                position: relative;
-                background-color: #217425; 
-                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
-                border: 3px solid #23441d ;">
-            </div>
-            <div style="
-                left: 3px;
-                top: 11px;
-                transform: rotate(230deg);
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                background-color: #58c45e; 
-                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
-                border: 3px solid #23441d ;">
-            </div>
-            <div style="
-                left: 6px;
-                top: 3px;
-                transform: rotate(280deg);
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                background-color: #17921d; 
-                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
-                border: 3px solid #23441d ;">
-            </div>
-            <div style="
-                left: 28px;
-                top: 14px;
-                transform: rotate(40deg);
-                width: 20px;
-                height: 20px;
-                position: absolute;
-                background-color: #17811c; 
-                clip-path: polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);
-                border: 3px solid #23441d ;">
-            </div>
-            </div>
-        </div> -->
+    <div class="patterns_frame" style="width: 100vw; height: 100vh;position: fixed;">
     </div>
+    <div class="pattern_btnGrp">
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%) ;"
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(69% 28%,49% 31%,62% 23%,74% 22%,89% 25%,90% 16%,81% 9%,65% 4%,35% 8%,14% 22%,3% 43%,0% 68%,0% 100%,6% 68%,19% 46%,36% 37%,21% 54%,11% 72%,2% 100%,55% 81%,73% 65%,81% 42%,85% 31%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(69% 28%,49% 31%,62% 23%,74% 22%,87% 23%,96% 26%,85% 12%,65% 4%,35% 8%,14% 22%,3% 43%,0% 68%,0% 100%,6% 68%,19% 46%,36% 37%,21% 54%,11% 72%,2% 100%,41% 66%,66% 50%,94% 33%,82% 31%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(33% 25%,44% 59%,61% 22%,2% 85%,76% 66%,18% 98%,91% 13%,4% 100%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(45% 88%,75% 73%,81% 51%,76% 35%,87% 34%,94% 25%,86% 17%,76% 19%,77% 7%,69% 0%,63% 8%,64% 19%,48% 11%,21% 19%,6% 54%,9% 74%,0% 100%,24% 85%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(45% 88%,75% 73%,81% 51%,76% 35%,87% 34%,94% 25%,86% 17%,76% 19%,77% 7%,69% 0%,63% 8%,64% 19%,48% 11%,21% 19%,6% 54%,9% 74%,0% 100%,17% 63%,23% 55%,29% 52%,42% 51%,39% 64%,33% 72%,25% 79%,0% 100%,24% 85%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path:polygon(74% 0%,62% 15%,26% 9%,6% 41%,37% 46%,0% 100%,49% 62%,36% 91%,71% 96%,92% 82%,85% 43%,100% 27%,98% 4%);" 
+            ></div>
+        </div>
+    </div> 
 </body> 
 <script>
     document.addEventListener("DOMContentLoaded", () => { 
         // console.log('123');
-        let leaves_frame = document.querySelector('.leaves_frame');
-        let leaves_obj = document.createElement('div');
-        leaves_obj.style.top = 'calc(50vh - 100px)';
-        leaves_obj.style.left = 'calc(50vw - 0px)';
-        leaves_obj.style.position = 'relative';
-        let leaf_total = 20 *4;
-        let leaf_freq = 16;
-        let leaf_rotate_temp = 0;  
+        // let patterns_frame = document.querySelector('.patterns_frame');
+        // let patterns_obj = document.createElement('div');
+        // patterns_obj.id = "patterns_obj";
+        // patterns_obj.style.top = 'calc(50vh - 100px)';
+        // patterns_obj.style.left = 'calc(50vw - 0px)';
+        // patterns_obj.style.position = 'relative';
+        let pattern_total = 20 *4;
+        let pattern_freq = 16;
+        let pattern_rotate_temp = 0;
+        let pattern_clipPath = 'polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%)';
         let color0 = 'rgb('+ (Math.floor(Math.random() * 105) + 50) +',' + (Math.floor(Math.random() * 105) + 50) +','+ (Math.floor(Math.random() * 155) + 50) + ')'; 
         let bgColor = colorInterpolate(color0,'rgb(255,255,255)' , 0.8);
         document.querySelector('body').style.backgroundColor = `rgb( `+bgColor.r+`,`+bgColor.g+`,`+bgColor.b+`)`;
         console.log('new flower : ');
-        for(let num = 1; num <= leaf_total; num++) {
-            console.log(num) 
-            setTimeout(function() {
+        let patternBtns = document.querySelectorAll('.pattern_btn');  
+        patternBtns.forEach(e => {
+            // console.log(e.children[0].style.clipPath);
+            e.children[0].style.backgroundColor = color0;
+            e.addEventListener("click", function(btn){
+                console.log(btn.target.children[0].style.clipPath);
+                GenPattern(pattern_total,pattern_freq,color0,btn.target.children[0].style.clipPath,pattern_rotate_temp);
+            });
+        });
+
+        GenPattern(pattern_total,pattern_freq,color0,pattern_clipPath,pattern_rotate_temp);
+        // for(let num = 1; num <= pattern_total; num++) {
+        //     console.log(num) 
+        //     setTimeout(function() { 
                 
-            let leaf_obj = document.createElement('div');
-            // const color1 = 'rgb(255,42,120)' ;
-            const color1 = color0 ;
-            const color2 = 'rgb(255,255,255)';
-            let percent = num * 0.9 / leaf_total;
-            console.log('percent : ' + (percent * 100) + '%'); 
-            let rgbNew = colorInterpolate(color1,color2, percent);
-            // console.log(rgbNew);
-            leaf_obj.style.position = 'absolute';
-            // leaf_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
-            // leaf_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
-            leaf_obj.style.width = (Math.random() * 20 + 105) + 'px';
-            leaf_obj.style.height = '100px'
-            leaf_obj.style.left = '0px';
-            leaf_obj.style.top = '0px';
-            // leaf_obj.style.backgroundColor = '#17921d';
-            leaf_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
-            leaf_rotate_temp = leaf_rotate_temp + (180 / leaf_total * leaf_freq) + Math.floor(Math.random() *30);
-            leaf_obj.style.rotate = leaf_rotate_temp + 'deg';
-            leaf_obj.style.transformOrigin = '0% 95%';
-            // leaf_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
-            leaf_obj.style.clipPath = 'polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%)';
-            leaf_obj.style.border = '6px solid '+ color0;
-            leaf_obj.style.filter = 'blur('+( 20 * ( (leaf_total - num) / leaf_total) +2)+'px)';
-            leaf_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color0, 0.5);
-            const timeline = new ViewTimeline({
-                subject: leaf_obj,
-                axis: "block",
-            });
-            // leaf_obj.animate( {
-            //     opacity: [0, 1.6], 
-            //     transform: ["rotate(0deg)","rotate(180deg)"]
-            //     // transform: ["scaleX(0)", "scaleX(1)"],
-            // },
-            // {
-            //     fill: "both", 
-            //     duration: 1,  
-            //     timeline,
-            //     rangeStart: "cover 0%",
-            //     rangeEnd: "cover 100%",      
-            // });
-            leaf_obj.addEventListener("mousedown", function(e){
-                this.remove();
-            });
-            leaves_obj.appendChild(leaf_obj);
-            }, 0);
-            // console.log(leaf_obj);
-        }
-        leaves_frame.appendChild(leaves_obj);
-        
-        // console.log(leaves_frame) 
+        //         let pattern_obj = document.createElement('div');
+        //         const color1 = color0 ;
+        //         const color2 = 'rgb(255,255,255)';
+        //         let percent = num * 0.9 / pattern_total;
+        //         console.log('percent : ' + (percent * 100) + '%'); 
+        //         let rgbNew = colorInterpolate(color1,color2, percent);
+        //         pattern_obj.id = "leaf-"+num ;
+        //         pattern_obj.style.position = 'absolute' ;  
+        //         pattern_obj.style.width = (Math.random() * 20 + 105) + 'px';
+        //         pattern_obj.style.height = '100px';
+        //         pattern_obj.style.left = '0px';
+        //         pattern_obj.style.top = '0px';
+        //         pattern_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
+        //         pattern_rotate_temp = pattern_rotate_temp + (180 / pattern_total * pattern_freq) + Math.floor(Math.random() *30);
+        //         pattern_obj.style.rotate = pattern_rotate_temp + 'deg';
+        //         pattern_obj.style.transformOrigin = '0% 95%';
+        //         pattern_obj.style.clipPath = 'polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%)';
+        //         pattern_obj.style.border = '6px solid '+ color0;
+        //         pattern_obj.style.filter = 'blur('+( 20 * ( (pattern_total - num) / pattern_total) + 2)+'px)';
+        //         pattern_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color0, 0.5);
+        //         pattern_obj.addEventListener("mousedown", function(e){
+        //             this.remove();
+        //         });
+        //         patterns_obj.appendChild(pattern_obj);
+        //     }, 0);
+        // }
+        // patterns_frame.appendChild(patterns_obj);
     });
+
+    function GenPattern(total,freq,color,clipPath,extra_rotate){
+        let patterns_frame = document.querySelector('.patterns_frame');
+        patterns_frame.innerHTML = '';
+        let patterns_obj = document.createElement('div');
+        patterns_obj.id = "patterns_obj";
+        patterns_obj.style.top = 'calc(50vh - 100px)';
+        patterns_obj.style.left = 'calc(50vw - 0px)';
+        patterns_obj.style.position = 'relative';
+
+        for(let num = 1; num <= total; num++) {
+            setTimeout(function() { 
+                
+                let pattern_obj = document.createElement('div');
+                // const color1 = 'rgb(255,42,120)' ;
+                const color1 = color ;
+                const color2 = 'rgb(255,255,255)';
+                let percent = num * 0.9 / total;
+                // console.log('percent : ' + (percent * 100) + '%'); 
+                let rgbNew = colorInterpolate(color1,color2, percent);
+                // console.log(rgbNew);
+                pattern_obj.id = "leaf-"+num ;
+                pattern_obj.style.position = 'absolute' ;  
+                // pattern_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
+                // pattern_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
+                pattern_obj.style.width = (Math.random() * 20 + 105) + 'px';
+                pattern_obj.style.height = '100px';
+                pattern_obj.style.left = '0px';
+                pattern_obj.style.top = '0px';
+                // pattern_obj.style.backgroundColor = '#17921d';
+                pattern_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
+                extra_rotate = extra_rotate + (180 / total * freq) + Math.floor(Math.random() *30);
+                pattern_obj.style.rotate = extra_rotate + 'deg';
+                pattern_obj.style.transformOrigin = '0% 95%';
+                // pattern_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
+                pattern_obj.style.clipPath = clipPath;
+                pattern_obj.style.border = '6px solid '+ color;
+                pattern_obj.style.filter = 'blur('+( 20 * ( (total - num) / total) + 2)+'px)';
+                pattern_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color, 0.5);
+                pattern_obj.addEventListener("mousedown", function(e){
+                    this.remove();
+                });
+                patterns_obj.appendChild(pattern_obj);
+            }, num * 5);
+            // console.log(pattern_obj);
+        }
+        patterns_frame.appendChild(patterns_obj);
+    }
 
     function colorInterpolate(colorA, colorB, intval) {
         const rgbA = getRgb(colorA),
