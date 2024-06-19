@@ -136,19 +136,25 @@
         background-color: #FFF;
         justify-content: center;
         align-items: center;
+        pointer-events: fill;
     }
 
     .pattern_btnGrp{
         display: flex;
+        flex-wrap: wrap;
         flex-direction: row;
         justify-content: center;
         gap: 10px 10px;
         width: 100vw;
-        height: 100vh;
+        height: calc(100vh - 15px);
         background-color: transparent;
         position: fixed;
         /* left: 10px; */
-        top: calc(100vh - 65px);
+        /* top: calc(100vh - 65px); */
+        align-items: center;
+        align-content: flex-end;
+        margin-bottom: 30px;
+        pointer-events:none;
     }
 
     .pattern_polygon{
@@ -175,7 +181,7 @@
         100%{
             opacity: 100%;
         }
-    }
+    } 
 
     @keyframes animIdle {
         0% {
@@ -287,6 +293,36 @@
             style="clip-path:polygon(74% 0%,62% 15%,26% 9%,6% 41%,37% 46%,0% 100%,49% 62%,36% 91%,71% 96%,92% 82%,85% 43%,100% 27%,98% 4%);" 
             ></div>
         </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path: polygon(84% 45%,91% 39%,97% 30%,100% 21%,100% 13%,99% 6%,92% 3%,80% 3%,71% 4%,62% 9%,55% 16%,49% 24%,0% 90%,60% 27%,0% 100%,75% 41%,10% 100%,74% 52%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path: polygon(82% 72%,94% 58%,99% 52%,94% 47%,88% 39%,85% 29%,87% 11%,80% 3%,71% 4%,62% 9%,55% 16%,49% 24%,28% 28%,19% 29%,8% 32%,0% 42%,0% 52%,60% 76%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path: polygon(25% 0%,70% 0%,40% 35%,95% 35%,20% 100%,40% 55%,0% 55%);;" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path: polygon(20% 0%, 0% 20%, 30% 50%, 0% 80%, 20% 100%, 50% 70%, 80% 100%, 100% 80%, 70% 50%, 100% 20%, 80% 0%, 50% 30%);" 
+            ></div>
+        </div>
+        <div class="pattern_btn" >
+            <div class="pattern_polygon"
+            style="clip-path: polygon(0% 14%,0% 4%,3% 1%,7% 0%,92% 79%,93% 92%,82% 99%,70% 100%,0% 60%,0% 56%,5% 53%,15% 53%,36% 64%,44% 61%,84% 54%,89% 57%,88% 63%,84% 67%,9% 100%,2% 98%,1% 93%,2% 86%,20% 64%,76% 49%,83% 45%,83% 40%,78% 36%,68% 32%,8% 28%);" 
+            ></div>
+        </div>
     </div> 
 </body> 
 <script>
@@ -358,6 +394,7 @@
         patterns_obj.style.top = 'calc(50vh - 100px)';
         patterns_obj.style.left = 'calc(50vw - 0px)';
         patterns_obj.style.position = 'relative';
+        let bonus = Math.floor(Math.random() * total) + 1;
 
         for(let num = 1; num <= total; num++) {
             setTimeout(function() { 
@@ -375,9 +412,9 @@
                 // pattern_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
                 // pattern_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
                 pattern_obj.style.width = (Math.random() * 20 + 105) + 'px';
-                pattern_obj.style.height = '100px';
-                pattern_obj.style.left = '0px';
-                pattern_obj.style.top = '0px';
+                pattern_obj.style.height = '100px'; 
+                pattern_obj.style.left = '0px'; 
+                pattern_obj.style.top = '0px'; 
                 // pattern_obj.style.backgroundColor = '#17921d';
                 pattern_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
                 extra_rotate = extra_rotate + (180 / total * freq) + Math.floor(Math.random() *30);
@@ -385,10 +422,15 @@
                 pattern_obj.style.transformOrigin = '0% 95%';
                 // pattern_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
                 pattern_obj.style.clipPath = clipPath;
-                pattern_obj.style.border = '6px solid '+ color;
+                pattern_obj.style.border = '6px solid '+ color;   
                 pattern_obj.style.filter = 'blur('+( 20 * ( (total - num) / total) + 2)+'px)';
+                if(num % bonus == 0 || bonus % num == 0){
+                    pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(270deg)';
+                }else{
+                    pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate('+num+'deg)';
+                }
                 pattern_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color, 0.5);
-                pattern_obj.addEventListener("mousedown", function(e){
+                pattern_obj.addEventListener("click", function(e){
                     this.remove();
                 });
                 patterns_obj.appendChild(pattern_obj);
