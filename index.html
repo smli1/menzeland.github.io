@@ -6,6 +6,10 @@
 <title>Menzeland</title>
 </head>
 <style>
+    body{
+        overflow: hidden;
+    }
+
     :root{
         --title-width: 200px;
         --main-theme-light-color: #9a98b3;
@@ -228,6 +232,41 @@
         98% { left: calc( 0px - var(--anim-width-offset)); top: calc(100% - var(--anim-height) - var(--anim-height-offset) - var(--anim-early-distance));transform: rotate(-270deg);}
         100% { left:calc( 0px - var(--anim-width-offset)); top: calc(100% - var(--anim-height) - var(--anim-height-offset) );transform: rotate(-360deg);}
     }
+
+    /* .falling_patterns > .falling_container {
+        animation-name: falling;
+        animation-duration: 10s;
+        animation-timing-function: linear;
+        animation-iteration-count: infinite;
+        animation-direction: forwards;
+        position: absolute;
+        top: -20vh;
+    } */
+
+    /* .falling_patterns > .falling_container > * {
+        animation-name: waving;
+        animation-duration: 1.5s;
+        animation-timing-function: ease-in-out;
+        animation-iteration-count: infinite;
+        animation-direction: alternate;
+        position: absolute;
+        top: 0;
+    } */
+
+    @keyframes falling {
+        to { transform: translateY(120vh);}
+    }
+
+    @keyframes waving {
+        to { transform: translateX(100px) rotateX(50deg); }
+    }
+
+    
+    @keyframes bloom {
+        
+        to { transform: scale(1.2); opacity: 0; pointer-events: none;}
+    }
+
 </style>
 <body>
     <div id="page">
@@ -248,9 +287,15 @@
     <!-- <div class="title">
         Menzelan  
     </div> -->
-    <div style="width: 100vw; height: 100vh; position: absolute; top:0; right: 0; margin: 0;padding: 0;
-    "></div>
-    <div class="patterns_frame" style="width: 100vw; height: 100vh;position: fixed;">
+    <!-- <div style="width: 100vw; height: 100vh; position: absolute; top:0; right: 0; margin: 0;padding: 0;
+    "></div> -->
+    <div class="falling_patterns" style="width: 100vw; height:100vh; position: absolute;">
+        <div class="falling_container">
+            <div class="pattern_obj" style="width: 50px; height: 50px; background-color: #FFF; clip-path:polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%);">
+            </div>
+        </div>
+    </div>
+    <div class="patterns_frame" style="width: 100vw; height: 100vh; position: fixed;">
     </div>
     <div class="pattern_btnGrp">
         <div class="pattern_btn" >
@@ -352,7 +397,7 @@
             });
         });
 
-        GenPattern(pattern_total,pattern_freq,color0,pattern_clipPath,pattern_rotate_temp);
+        GenPattern(pattern_total, pattern_freq, color0, pattern_clipPath, pattern_rotate_temp);
         // for(let num = 1; num <= pattern_total; num++) {
         //     console.log(num) 
         //     setTimeout(function() { 
@@ -387,6 +432,8 @@
     });
 
     function GenPattern(total,freq,color,clipPath,extra_rotate){
+        let falling_patterns = document.querySelector('.falling_patterns');
+        falling_patterns.innerHTML = '';
         let patterns_frame = document.querySelector('.patterns_frame');
         patterns_frame.innerHTML = '';
         let patterns_obj = document.createElement('div');
@@ -421,17 +468,62 @@
                 pattern_obj.style.rotate = extra_rotate + 'deg';
                 pattern_obj.style.transformOrigin = '0% 95%';
                 // pattern_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
-                pattern_obj.style.clipPath = clipPath;
-                pattern_obj.style.border = '6px solid '+ color;   
+                pattern_obj.style.clipPath = clipPath; 
+                pattern_obj.style.border = '6px solid '+ color;
                 pattern_obj.style.filter = 'blur('+( 20 * ( (total - num) / total) + 2)+'px)';
-                if(num % bonus == 0 || bonus % num == 0){
+                pattern_obj.style.cursor = 'pointer';
+                if(num % bonus == 0){
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(270deg)';
+                }
+                if(bonus % num == 0){
+                    pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(30deg)';
                 }else{
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate('+num+'deg)';
                 }
                 pattern_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color, 0.5);
-                pattern_obj.addEventListener("click", function(e){
-                    this.remove();
+                pattern_obj.addEventListener("click", function(e){ 
+                    let pattern_container = document.createElement('div');
+                    let temp_clone = this.cloneNode(true);
+                    pattern_container.classList.add('pattern_container');
+                    pattern_container.style.position = 'absolute';
+                    pattern_container.style.top = '-20vh';
+                    pattern_container.style.animation = 'falling';
+                    pattern_container.style.animationDuration = Math.floor(Math.random() * 5 + 5) + 's';
+                    pattern_container.style.animationIterationCount = 'infinite';
+                    pattern_container.style.animationTimingFunction = 'linear';
+                    pattern_container.addEventListener("animationiteration", e => {
+                        // pattern_container.remove();
+                        // console.log(e);
+                        if(e.animationName == 'falling'){
+                            pattern_container.style.left = Math.floor(Math.random() * (window.innerWidth + 20) - 10 ) + 'px';
+                            // console.log('new left: '+pattern_container.style.left);
+                        }
+                    }, true);
+                    temp_clone.style.rotate = (Math.floor(Math.random() * 180) - 90) + 'deg';
+                    temp_clone.style.scale = Math.random() * 0.3 + 0.3;
+                    let order = Math.random() * 0.5 + 0.5;
+                    temp_clone.style.filter = 'bur('+(order*10)+'px)';
+                    // this.style.opacity = order;
+                    temp_clone.style.zIndex = Math.floor(order * 10);
+                    temp_clone.style.transformOrigin = '50% 50%';
+                    temp_clone.style.cursor = 'auto';
+                    temp_clone.style.animation = 'waving';
+                    temp_clone.style.animationDuration = '1.5s';
+                    temp_clone.style.animationDirection = 'alternate';
+                    temp_clone.style.animationTimingFunction = 'ease-in-out';
+                    temp_clone.style.animationIterationCount = 'infinite';
+                    pattern_container.style.left = Math.floor(Math.random() * (window.innerWidth + 20) - 10 ) + 'px';
+                    
+                    pattern_container.appendChild(temp_clone);
+                    falling_patterns.appendChild(pattern_container);
+                    this.style.animation = 'bloom'; 
+                    this.style.animationDuration = '0.2s';
+                    this.style.animationIterationCount = '1';
+                    this.style.animationTimingFunction = 'linear';
+                    this.addEventListener("animationend", e => {
+                        this.remove();
+                    }, false);
+                    // this.remove();
                 });
                 patterns_obj.appendChild(pattern_obj);
             }, num * 5);
@@ -463,6 +555,9 @@
         b
     }
     }
+
+    
+
 </script>
 
 </html>
