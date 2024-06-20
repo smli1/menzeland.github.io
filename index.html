@@ -438,8 +438,8 @@
         patterns_frame.innerHTML = '';
         let patterns_obj = document.createElement('div');
         patterns_obj.id = "patterns_obj";
-        patterns_obj.style.top = '30vh';
-        patterns_obj.style.left = '50vw';
+        patterns_obj.style.top = 'calc(50vh - 100px)';
+        patterns_obj.style.left = 'calc(50vw - 0px)';
         patterns_obj.style.position = 'relative';
         let bonus = Math.floor(Math.random() * total) + 1;
 
@@ -458,11 +458,8 @@
                 pattern_obj.style.position = 'absolute' ;  
                 // pattern_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
                 // pattern_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
-                // pattern_obj.style.width = (Math.random() * 20 + 105) + 'px';
-                let size = (20);
-                pattern_obj.style.width = (size) + 'vw';
-                // pattern_obj.style.height = '100px'; 
-                pattern_obj.style.height =  size + 'vw'; 
+                pattern_obj.style.width = (Math.random() * 20 + 105) + 'px';
+                pattern_obj.style.height = '100px'; 
                 pattern_obj.style.left = '0px'; 
                 pattern_obj.style.top = '0px'; 
                 // pattern_obj.style.backgroundColor = '#17921d';
