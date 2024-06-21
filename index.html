@@ -437,11 +437,15 @@
         let patterns_frame = document.querySelector('.patterns_frame');
         patterns_frame.innerHTML = '';
         let patterns_obj = document.createElement('div');
-        patterns_obj.id = "patterns_obj";
+        patterns_obj.id = 'patterns_obj';
         patterns_obj.style.top = 'calc(50vh - 100px)';
         patterns_obj.style.left = 'calc(50vw - 0px)';
         patterns_obj.style.position = 'relative';
         let bonus = Math.floor(Math.random() * total) + 1;
+        let pattern_width = 105;
+        let pattern_width_range = 20;
+        let pattern_height = 100;
+        let rotate_angle_total = 180;
 
         for(let num = 1; num <= total; num++) {
             setTimeout(function() { 
@@ -454,23 +458,23 @@
                 // console.log('percent : ' + (percent * 100) + '%'); 
                 let rgbNew = colorInterpolate(color1,color2, percent);
                 // console.log(rgbNew);
-                pattern_obj.id = "leaf-"+num ;
+                pattern_obj.id = 'leaf-'+num ;
                 pattern_obj.style.position = 'absolute' ;  
                 // pattern_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
                 // pattern_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
-                pattern_obj.style.width = (Math.random() * 20 + 105) + 'px';
-                pattern_obj.style.height = '100px'; 
+                pattern_obj.style.width = (Math.random() * pattern_width_range + pattern_width) + 'px';
+                pattern_obj.style.height = pattern_height + 'px'; 
                 pattern_obj.style.left = '0px'; 
                 pattern_obj.style.top = '0px'; 
                 // pattern_obj.style.backgroundColor = '#17921d';
                 pattern_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
-                extra_rotate = extra_rotate + (180 / total * freq) + Math.floor(Math.random() *30);
+                extra_rotate = extra_rotate + (rotate_angle_total / total * freq) + Math.floor(Math.random() * 30);
                 pattern_obj.style.rotate = extra_rotate + 'deg';
                 pattern_obj.style.transformOrigin = '0% 95%';
                 // pattern_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
                 pattern_obj.style.clipPath = clipPath; 
                 pattern_obj.style.border = '6px solid '+ color;
-                pattern_obj.style.filter = 'blur('+( 20 * ( (total - num) / total) + 2)+'px)';
+                pattern_obj.style.filter = 'blur('+( 10 * ( (total - num) / total) + 2)+'px)';
                 pattern_obj.style.cursor = 'pointer';
                 if(num % bonus == 0){
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(270deg)';
@@ -517,11 +521,11 @@
                     temp_clone.style.animationDirection = 'alternate';
                     temp_clone.style.animationTimingFunction = 'ease-in-out';
                     temp_clone.style.animationIterationCount = 'infinite';
-                    pattern_container.style.left = Math.floor(Math.random() * (window.innerWidth + 20) - 10 ) + 'px';
+                    pattern_container.style.left = Math.floor(Math.random() * (window.innerWidth + 50) - 25 ) + 'px';
                     
                     pattern_container.appendChild(temp_clone);
                     falling_patterns.appendChild(pattern_container);
-                    this.style.animation = 'bloom'; 
+                    this.style.animation = 'bloom';
                     this.style.animationDuration = '0.2s';
                     this.style.animationIterationCount = '1';
                     this.style.animationTimingFunction = 'linear';
