@@ -474,7 +474,7 @@
                 pattern_obj.style.cursor = 'pointer';
                 if(num % bonus == 0){
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(270deg)';
-                }
+                } 
                 if(bonus % num == 0){
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(30deg)';
                 }else{
@@ -500,7 +500,12 @@
                         }
                     }, true);
                     temp_clone.style.rotate = (Math.floor(Math.random() * 180) - 90) + 'deg';
-                    temp_clone.style.scale = Math.random() * 0.3 + 0.3;
+                    // temp_clone.style.scale = Math.random() * 0.3 + 0.3;
+                    console.log('clone: '+ temp_clone);
+                    // console.log('width: '+ parseFloat( temp_clone.style.width) * 0.3 );
+                    // console.log('height: '+ parseFloat( temp_clone.style.height) * 0.3 );
+                    temp_clone.style.width =  (parseFloat(temp_clone.style.width)  * 0.3 * (Math.random() + 1)) + 'px';
+                    temp_clone.style.height =  (parseFloat(temp_clone.style.height) * 0.3 * (Math.random() + 1)) + 'px';
                     let order = Math.random() * 0.5 + 0.5;
                     temp_clone.style.filter = 'bur('+(order*10)+'px)';
                     // this.style.opacity = order;
