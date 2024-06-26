@@ -215,22 +215,50 @@
     }
 
     @keyframes animWalk {
-        0%   { left:calc( 0px - var(--anim-width-offset)); top: calc(100% - var(--anim-height) - var(--anim-height-offset));}
-        24%  { left: calc( 100% - var(--anim-width) + var( --anim-width-offset) - var(--anim-early-distance) ); top: calc(100% - var(--anim-height) - var(--anim-height-offset));
-                transform: rotate(0deg);}
-        26%  { left: calc( 100% - var(--anim-width) + var( --anim-width-offset) ); top: calc(100% - var(--anim-height) - var(--anim-height-offset));
-                transform: rotate(-90deg);
-            }
-        49%  { left:calc( 100% - var(--anim-width) + var( --anim-width-offset) ); top: calc( 0px - var(--anim-height-offset) + var(--anim-early-distance));
-            transform: rotate(-90deg);}
-        51%  { left:calc( 100% - var(--anim-width) + var( --anim-width-offset) ); top: calc( 0px - var(--anim-height-offset));
-            transform: rotate(-180deg);}
-        74%  { left:calc( 0px - var(--anim-width-offset) + var(--anim-early-distance)); top:calc( 0px - var(--anim-height-offset));
-            transform: rotate(-180deg);}
-        76%  { left:calc( 0px - var(--anim-width-offset)); top:calc( 0px - var(--anim-height-offset));
-            transform: rotate(-270deg);}
-        98% { left: calc( 0px - var(--anim-width-offset)); top: calc(100% - var(--anim-height) - var(--anim-height-offset) - var(--anim-early-distance));transform: rotate(-270deg);}
-        100% { left:calc( 0px - var(--anim-width-offset)); top: calc(100% - var(--anim-height) - var(--anim-height-offset) );transform: rotate(-360deg);}
+        0%   { 
+            left: calc( 0px - var(--anim-width-offset) ); 
+            top: calc( 100% - var(--anim-height) - var(--anim-height-offset) );
+        }
+        24%  { 
+            left: calc( 100% - var(--anim-width) + var( --anim-width-offset) - var(--anim-early-distance) ); 
+            top: calc( 100% - var(--anim-height) - var(--anim-height-offset) );
+            transform: rotate(0deg);
+        }
+        26%  { 
+            left: calc( 100% - var(--anim-width) + var( --anim-width-offset) ); 
+            top: calc( 100% - var(--anim-height) - var(--anim-height-offset) );
+            transform: rotate(-90deg);
+        }
+        49%  { 
+            left: calc( 100% - var(--anim-width) + var( --anim-width-offset) ); 
+            top: calc( 0px - var(--anim-height-offset) + var(--anim-early-distance) );
+            transform: rotate(-90deg);
+        }
+        51%  { 
+            left: calc( 100% - var(--anim-width) + var( --anim-width-offset) ); 
+            top: calc( 0px - var(--anim-height-offset) );
+            transform: rotate(-180deg);
+        }
+        74%  { 
+            left: calc( 0px - var(--anim-width-offset) + var(--anim-early-distance) ); 
+            top: calc( 0px - var(--anim-height-offset) );
+            transform: rotate(-180deg);
+        }
+        76%  { 
+            left: calc( 0px - var(--anim-width-offset) ); 
+            top: calc( 0px - var(--anim-height-offset) );
+            transform: rotate(-270deg);
+        }
+        98% { 
+            left: calc( 0px - var(--anim-width-offset) ); 
+            top: calc(100% - var(--anim-height) - var(--anim-height-offset) - var(--anim-early-distance) );
+            transform: rotate(-270deg);
+        }
+        100% { 
+            left: calc( 0px - var(--anim-width-offset) ); 
+            top: calc( 100% - var(--anim-height) - var(--anim-height-offset) );
+            transform: rotate(-360deg);
+        }
     }
 
     /* .falling_patterns > .falling_container {
@@ -254,17 +282,23 @@
     } */
 
     @keyframes falling {
-        to { transform: translateY(120vh);}
+        to { 
+            transform: translateY(120vh);
+        }
     }
 
     @keyframes waving {
-        to { transform: translateX(100px) rotateX(50deg); }
+        to { 
+            transform: translateX(100px) rotateX(50deg);
+        }
     }
-
     
-    @keyframes bloom {
-        
-        to { transform: scale(1.2); opacity: 0; pointer-events: none;}
+    @keyframes bloom {        
+        to {
+            transform: scale(1.2);
+            opacity: 0;
+            pointer-events: none;
+        }
     }
 
 </style>
@@ -379,7 +413,7 @@
         // patterns_obj.style.top = 'calc(50vh - 100px)';
         // patterns_obj.style.left = 'calc(50vw - 0px)';
         // patterns_obj.style.position = 'relative';
-        let pattern_total = 20 *4;
+        let pattern_total = 20 * 4;
         let pattern_freq = 16;
         let pattern_rotate_temp = 0;
         let pattern_clipPath = 'polygon(0% 100%,60% 80%,75% 62%,83% 36%,88% 12%,49% 13%,23% 25%,6% 54%,0% 100%,34% 53%,60% 32%,42% 57%)';
@@ -393,10 +427,10 @@
             e.children[0].style.backgroundColor = color0;
             e.addEventListener("click", function(btn){
                 console.log(btn.target.children[0].style.clipPath);
-                GenPattern(pattern_total,pattern_freq,color0,btn.target.children[0].style.clipPath,pattern_rotate_temp);
+                GenPattern(pattern_total, pattern_freq, color0, btn.target.children[0].style.clipPath, pattern_rotate_temp);
             });
         });
-
+        
         GenPattern(pattern_total, pattern_freq, color0, pattern_clipPath, pattern_rotate_temp);
         // for(let num = 1; num <= pattern_total; num++) {
         //     console.log(num) 
@@ -431,7 +465,7 @@
         // patterns_frame.appendChild(patterns_obj);
     });
 
-    function GenPattern(total,freq,color,clipPath,extra_rotate){
+    function GenPattern(total, freq, color, clipPath, extra_rotate){
         let falling_patterns = document.querySelector('.falling_patterns');
         falling_patterns.innerHTML = '';
         let patterns_frame = document.querySelector('.patterns_frame');
@@ -459,14 +493,14 @@
                 let rgbNew = colorInterpolate(color1,color2, percent);
                 // console.log(rgbNew);
                 pattern_obj.id = 'leaf-'+num ;
-                pattern_obj.style.position = 'absolute' ;  
+                pattern_obj.style.position = 'absolute' ;
                 // pattern_obj.style.width = Math.floor(Math.random() * 20 + 10) + 'px';
                 // pattern_obj.style.height = Math.floor(Math.random() * 20 + 10) + 'px';
                 pattern_obj.style.width = (Math.random() * pattern_width_range + pattern_width) + 'px';
                 pattern_obj.style.height = pattern_height + 'px'; 
                 pattern_obj.style.left = '0px'; 
                 pattern_obj.style.top = '0px';
-                
+
                 // pattern_obj.style.backgroundColor = '#17921d';
                 pattern_obj.style.backgroundColor = `rgb( `+rgbNew.r+`,`+rgbNew.g+`,`+rgbNew.b+`)`;
                 extra_rotate = extra_rotate + (rotate_angle_total / total * freq) + Math.floor(Math.random() * 30);
@@ -475,7 +509,7 @@
                 // pattern_obj.style.clipPath = 'polygon(66% 74%,81% 46%,86% 9%,52% 10%,24% 28%,5% 60%,0% 100%,47% 89%)';
                 pattern_obj.style.clipPath = clipPath; 
                 pattern_obj.style.border = '6px solid '+ color;
-                pattern_obj.style.filter = 'blur('+( 10 * ( (total - num) / total) + 2)+'px)';
+                pattern_obj.style.filter = 'blur('+( 10 * ( (total - num) / total ) + 2 )+'px)';
                 pattern_obj.style.cursor = 'pointer';
                 if(num % bonus == 0){
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate(270deg)';
@@ -486,7 +520,7 @@
                     pattern_obj.style.filter = pattern_obj.style.filter + ' hue-rotate('+num+'deg)';
                 }
                 pattern_obj.style.boxShadow = '5px 5px 5px 60px '+colorInterpolate('rgb(0,0,0)', color, 0.5);
-                pattern_obj.addEventListener("click", function(e){ 
+                pattern_obj.addEventListener("click", function(e){
                     let pattern_container = document.createElement('div');
                     let temp_clone = this.cloneNode(true);
                     pattern_container.classList.add('pattern_container');
@@ -506,13 +540,13 @@
                     }, true);
                     temp_clone.style.rotate = (Math.floor(Math.random() * 180) - 90) + 'deg';
                     // temp_clone.style.scale = Math.random() * 0.3 + 0.3;
-                    console.log('clone: '+ temp_clone);
+                    console.log('clone: ' + temp_clone);
                     // console.log('width: '+ parseFloat( temp_clone.style.width) * 0.3 );
                     // console.log('height: '+ parseFloat( temp_clone.style.height) * 0.3 );
                     temp_clone.style.width =  (parseFloat(temp_clone.style.width)  * 0.3 * (Math.random() + 1)) + 'px';
                     temp_clone.style.height =  (parseFloat(temp_clone.style.height) * 0.3 * (Math.random() + 1)) + 'px';
                     let order = Math.random() * 0.5 + 0.5;
-                    temp_clone.style.filter = 'bur('+(order*10)+'px)';
+                    temp_clone.style.filter = 'bur('+(order * 10)+'px)';
                     // this.style.opacity = order;
                     temp_clone.style.zIndex = Math.floor(order * 10);
                     temp_clone.style.transformOrigin = '50% 50%';
@@ -558,7 +592,7 @@
     let [r, g, b] = color.replace('rgb(', '')
         .replace(')', '')
         .split(',')
-        .map(str => Number(str));;
+        .map(str => Number(str));
     return {
         r,
         g,
